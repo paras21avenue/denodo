@@ -1,0 +1,7 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON ds_oauth_introspect
+    FOLDER = '/1 - connectivity/1 - data sources'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' POST '${databases.denodo_team2.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_oauth_introspect.ROUTE.HTTP.URL}'
+    AUTHENTICATION OFF
+    PROXY OFF;
+

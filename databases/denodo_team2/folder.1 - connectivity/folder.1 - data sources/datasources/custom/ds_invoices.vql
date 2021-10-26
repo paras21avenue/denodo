@@ -1,0 +1,34 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE CUSTOM ds_invoices
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CLASSNAME='com.denodo.vdb.contrib.wrapper.xls.ExcelWrapper';
+
+CREATE OR REPLACE WRAPPER CUSTOM ds_invoices
+    FOLDER = '/1 - connectivity'
+    DATASOURCENAME=ds_invoices
+    PARAMETERS (
+      'Type of file' = 'Excel 2007 or later (*.xlsx)',
+      'File location' = ROUTE LOCAL 'LocalConnection' '${databases.denodo_team2.folder.1 - connectivity.views.custom.ds_invoices.File location.ROUTE.LOCAL.PATH}' FILTER (UNZIP ),
+      'Extract data from all sheets' = true,
+      'Extract sheet name as a new column' = false,
+      'Start cell' = 'A4',
+      'Has headers' = true,
+      'Stream tuples' = true
+    )
+    OUTPUTSCHEMA (
+        invoice_id = 'invoice_id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        date_invoice = 'date_invoice' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        order_id = 'order_id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        date_placed = 'date_placed' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        date_delivered = 'date_delivered' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        date_closed = 'date_closed' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        first_name = 'first_name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        last_name = 'last_name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        email = 'email' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        address = 'address' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        country = 'country' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        postal_code = 'postal_code' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        phone = 'phone' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        amount = 'amount' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE
+    );
+

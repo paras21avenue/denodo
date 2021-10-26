@@ -1,0 +1,11 @@
+﻿CREATE OR REPLACE INTERFACE VIEW interaction (
+        customer_code:text,
+        agent_id:decimal,
+        interaction_date:localdate,
+        case_id:decimal,
+        interaction_phone:text,
+        interaction_ip:text
+    )
+    SET IMPLEMENTATION interaction_dummy
+    FOLDER = '/importedmodels';
+

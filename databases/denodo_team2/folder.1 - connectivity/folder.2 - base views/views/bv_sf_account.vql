@@ -1,0 +1,209 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_sf_account
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_crm
+    SCHEMANAME='${databases.denodo_team2.folder.1 - connectivity.folder.2 - base views.views.jdbc.bv_sf_account.SCHEMANAME}' 
+    RELATIONNAME='ACCOUNT' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        isdeleted = 'ISDELETED' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        masterrecordid = 'MASTERRECORDID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        name = 'NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        type = 'TYPE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        parentid = 'PARENTID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billingstreet = 'BILLINGSTREET' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billingcity = 'BILLINGCITY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billingstate = 'BILLINGSTATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billingpostalcode = 'BILLINGPOSTALCODE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billingcountry = 'BILLINGCOUNTRY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='128', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billinglatitude = 'BILLINGLATITUDE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billinglongitude = 'BILLINGLONGITUDE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        billinggeocodeaccuracy = 'BILLINGGEOCODEACCURACY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippingstreet = 'SHIPPINGSTREET' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='128', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippingcity = 'SHIPPINGCITY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippingstate = 'SHIPPINGSTATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippingpostalcode = 'SHIPPINGPOSTALCODE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippingcountry = 'SHIPPINGCOUNTRY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='128', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippinglatitude = 'SHIPPINGLATITUDE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippinglongitude = 'SHIPPINGLONGITUDE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        shippinggeocodeaccuracy = 'SHIPPINGGEOCODEACCURACY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        phone = 'PHONE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        fax = 'FAX' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        website = 'WEBSITE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        photourl = 'PHOTOURL' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        industry = 'INDUSTRY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        annualrevenue = 'ANNUALREVENUE' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='8', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        numberofemployees = 'NUMBEROFEMPLOYEES' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='6', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        description = 'DESCRIPTION' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='4', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        currencyisocode = 'CURRENCYISOCODE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        ownerid = 'OWNERID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        createddate = 'CREATEDDATE' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        createdbyid = 'CREATEDBYID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        lastmodifieddate = 'LASTMODIFIEDDATE' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        lastmodifiedbyid = 'LASTMODIFIEDBYID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        systemmodstamp = 'SYSTEMMODSTAMP' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        lastactivitydate = 'LASTACTIVITYDATE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        lastvieweddate = 'LASTVIEWEDDATE' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        lastreferenceddate = 'LASTREFERENCEDDATE' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        jigsaw = 'JIGSAW' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        jigsawcompanyid = 'JIGSAWCOMPANYID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        accountsource = 'ACCOUNTSOURCE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        sicdesc = 'SICDESC' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        zoom__zi_importeddate__c = 'ZOOM__ZI_IMPORTEDDATE__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        zoom__zi_company__c = 'ZOOM__ZI_COMPANY__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        external_customer_code__c = 'EXTERNAL_CUSTOMER_CODE__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        d_u_n_s__c = 'D_U_N_S__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        hooversid__c = 'HOOVERSID__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        status__c = 'STATUS__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        publishable__c = 'PUBLISHABLE__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__billingaddressstatus__c = 'PW_CC__BILLINGADDRESSSTATUS__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__billingcountrylookup__c = 'PW_CC__BILLINGCOUNTRYLOOKUP__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__billingstatelookup__c = 'PW_CC__BILLINGSTATELOOKUP__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__shippingaddressstatus_c = 'PW_CC__SHIPPINGADDRESSSTATUS_C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__shippingcountrylookup_c = 'PW_CC__SHIPPINGCOUNTRYLOOKUP_C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__shippingstatelookup__c = 'PW_CC__SHIPPINGSTATELOOKUP__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        target_level__c = 'TARGET_LEVEL__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        auxfilteringcode__c = 'AUXFILTERINGCODE__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        accounts__c = 'ACCOUNTS__C' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='3', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        pw_cc__billingzipcodelookup__c = 'PW_CC__BILLINGZIPCODELOOKUP__C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        pw_cc__shippingzipcodelookup_c = 'PW_CC__SHIPPINGZIPCODELOOKUP_C' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='26', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_sf_account I18N us_pst (
+        id:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        isdeleted:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        masterrecordid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        type:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        parentid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billingstreet:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billingcity:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billingstate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billingpostalcode:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billingcountry:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '128'),
+        billinglatitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billinglongitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        billinggeocodeaccuracy:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippingstreet:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '128'),
+        shippingcity:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippingstate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippingpostalcode:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippingcountry:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '128'),
+        shippinglatitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippinglongitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        shippinggeocodeaccuracy:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        phone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        fax:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        website:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        photourl:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        industry:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        annualrevenue:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '8'),
+        numberofemployees:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '6'),
+        description:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '4'),
+        currencyisocode:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        ownerid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        createddate:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        createdbyid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        lastmodifieddate:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        lastmodifiedbyid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        systemmodstamp:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        lastactivitydate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        lastvieweddate:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        lastreferenceddate:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        jigsaw:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        jigsawcompanyid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        accountsource:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        sicdesc:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        zoom__zi_importeddate__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        zoom__zi_company__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        external_customer_code__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        d_u_n_s__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        hooversid__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        status__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        publishable__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__billingaddressstatus__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__billingcountrylookup__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__billingstatelookup__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__shippingaddressstatus_c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__shippingcountrylookup_c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__shippingstatelookup__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        target_level__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        auxfilteringcode__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        accounts__c:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '3'),
+        pw_cc__billingzipcodelookup__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26'),
+        pw_cc__shippingzipcodelookup_c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '26')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_sf_account(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD isdeleted (any) OPT ANY
+             ADD masterrecordid (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD type (any) OPT ANY
+             ADD parentid (any) OPT ANY
+             ADD billingstreet (any) OPT ANY
+             ADD billingcity (any) OPT ANY
+             ADD billingstate (any) OPT ANY
+             ADD billingpostalcode (any) OPT ANY
+             ADD billingcountry (any) OPT ANY
+             ADD billinglatitude (any) OPT ANY
+             ADD billinglongitude (any) OPT ANY
+             ADD billinggeocodeaccuracy (any) OPT ANY
+             ADD shippingstreet (any) OPT ANY
+             ADD shippingcity (any) OPT ANY
+             ADD shippingstate (any) OPT ANY
+             ADD shippingpostalcode (any) OPT ANY
+             ADD shippingcountry (any) OPT ANY
+             ADD shippinglatitude (any) OPT ANY
+             ADD shippinglongitude (any) OPT ANY
+             ADD shippinggeocodeaccuracy (any) OPT ANY
+             ADD phone (any) OPT ANY
+             ADD fax (any) OPT ANY
+             ADD website (any) OPT ANY
+             ADD photourl (any) OPT ANY
+             ADD industry (any) OPT ANY
+             ADD annualrevenue (any) OPT ANY
+             ADD numberofemployees (any) OPT ANY
+             ADD description (any) OPT ANY
+             ADD currencyisocode (any) OPT ANY
+             ADD ownerid (any) OPT ANY
+             ADD createddate (any) OPT ANY
+             ADD createdbyid (any) OPT ANY
+             ADD lastmodifieddate (any) OPT ANY
+             ADD lastmodifiedbyid (any) OPT ANY
+             ADD systemmodstamp (any) OPT ANY
+             ADD lastactivitydate (any) OPT ANY
+             ADD lastvieweddate (any) OPT ANY
+             ADD lastreferenceddate (any) OPT ANY
+             ADD jigsaw (any) OPT ANY
+             ADD jigsawcompanyid (any) OPT ANY
+             ADD accountsource (any) OPT ANY
+             ADD sicdesc (any) OPT ANY
+             ADD zoom__zi_importeddate__c (any) OPT ANY
+             ADD zoom__zi_company__c (any) OPT ANY
+             ADD external_customer_code__c (any) OPT ANY
+             ADD d_u_n_s__c (any) OPT ANY
+             ADD hooversid__c (any) OPT ANY
+             ADD status__c (any) OPT ANY
+             ADD publishable__c (any) OPT ANY
+             ADD pw_cc__billingaddressstatus__c (any) OPT ANY
+             ADD pw_cc__billingcountrylookup__c (any) OPT ANY
+             ADD pw_cc__billingstatelookup__c (any) OPT ANY
+             ADD pw_cc__shippingaddressstatus_c (any) OPT ANY
+             ADD pw_cc__shippingcountrylookup_c (any) OPT ANY
+             ADD pw_cc__shippingstatelookup__c (any) OPT ANY
+             ADD target_level__c (any) OPT ANY
+             ADD auxfilteringcode__c (any) OPT ANY
+             ADD accounts__c (any) OPT ANY
+             ADD pw_cc__billingzipcodelookup__c (any) OPT ANY
+             ADD pw_cc__shippingzipcodelookup_c (any) OPT ANY
+        )
+        OUTPUTLIST (accounts__c, accountsource, annualrevenue, auxfilteringcode__c, billingcity, billingcountry, billinggeocodeaccuracy, billinglatitude, billinglongitude, billingpostalcode, billingstate, billingstreet, createdbyid, createddate, currencyisocode, d_u_n_s__c, description, external_customer_code__c, fax, hooversid__c, id, industry, isdeleted, jigsaw, jigsawcompanyid, lastactivitydate, lastmodifiedbyid, lastmodifieddate, lastreferenceddate, lastvieweddate, masterrecordid, name, numberofemployees, ownerid, parentid, phone, photourl, publishable__c, pw_cc__billingaddressstatus__c, pw_cc__billingcountrylookup__c, pw_cc__billingstatelookup__c, pw_cc__billingzipcodelookup__c, pw_cc__shippingaddressstatus_c, pw_cc__shippingcountrylookup_c, pw_cc__shippingstatelookup__c, pw_cc__shippingzipcodelookup_c, shippingcity, shippingcountry, shippinggeocodeaccuracy, shippinglatitude, shippinglongitude, shippingpostalcode, shippingstate, shippingstreet, sicdesc, status__c, systemmodstamp, target_level__c, type, website, zoom__zi_company__c, zoom__zi_importeddate__c
+        )
+        WRAPPER (jdbc bv_sf_account)
+    );
+

@@ -1,0 +1,196 @@
+﻿CREATE OR REPLACE WRAPPER JDBC bv_sf_contact
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_crm
+    RELATIONNAME='contact' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        isdeleted = 'isdeleted' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        masterrecordid = 'masterrecordid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        accountid = 'accountid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastname = 'lastname' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        firstname = 'firstname' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        salutation = 'salutation' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherstreet = 'otherstreet' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        othercity = 'othercity' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherstate = 'otherstate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherpostalcode = 'otherpostalcode' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        othercountry = 'othercountry' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherlatitude = 'otherlatitude' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherlongitude = 'otherlongitude' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otheraddress = 'otheraddress' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingstreet = 'mailingstreet' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingcity = 'mailingcity' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingstate = 'mailingstate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingpostalcode = 'mailingpostalcode' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingcountry = 'mailingcountry' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailinglatitude = 'mailinglatitude' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailinglongitude = 'mailinglongitude' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mailingaddress = 'mailingaddress' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        phone = 'phone' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        fax = 'fax' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        mobilephone = 'mobilephone' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        homephone = 'homephone' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        otherphone = 'otherphone' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        assistantphone = 'assistantphone' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        reportstoid = 'reportstoid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        email = 'email' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        title = 'title' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        department = 'department' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        assistantname = 'assistantname' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        leadsource = 'leadsource' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        birthdate = 'birthdate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        description = 'description' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        ownerid = 'ownerid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        createddate = 'createddate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        createdbyid = 'createdbyid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastmodifieddate = 'lastmodifieddate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastmodifiedbyid = 'lastmodifiedbyid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        systemmodstamp = 'systemmodstamp' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastactivitydate = 'lastactivitydate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastcurequestdate = 'lastcurequestdate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastcuupdatedate = 'lastcuupdatedate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastvieweddate = 'lastvieweddate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        lastreferenceddate = 'lastreferenceddate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        emailbouncedreason = 'emailbouncedreason' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        emailbounceddate = 'emailbounceddate' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        isemailbounced = 'isemailbounced' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        photourl = 'photourl' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        jigsaw = 'jigsaw' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        jigsawcontactid = 'jigsawcontactid' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        cleanstatus = 'cleanstatus' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        level__c = 'level__c' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE,
+        languages__c = 'languages__c' :'java.lang.String' (OPT) (sourcetypedecimals='10', sourcetyperadix='10', sourcetypesize='2000000000', sourcetypeid='12', sourcetypename='TEXT')  NOT SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_sf_contact I18N us_pst (
+        id:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        isdeleted:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        masterrecordid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        accountid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastname:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        firstname:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        salutation:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherstreet:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        othercity:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherstate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherpostalcode:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        othercountry:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherlatitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherlongitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otheraddress:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingstreet:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingcity:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingstate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingpostalcode:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingcountry:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailinglatitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailinglongitude:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mailingaddress:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        phone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        fax:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        mobilephone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        homephone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        otherphone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        assistantphone:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        reportstoid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        email:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        title:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        department:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        assistantname:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        leadsource:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        birthdate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        description:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        ownerid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        createddate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        createdbyid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastmodifieddate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastmodifiedbyid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        systemmodstamp:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastactivitydate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastcurequestdate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastcuupdatedate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastvieweddate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        lastreferenceddate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        emailbouncedreason:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        emailbounceddate:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        isemailbounced:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        photourl:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        jigsaw:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        jigsawcontactid:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        cleanstatus:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        level__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000'),
+        languages__c:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '10', sourcetypesize = '2000000000')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_sf_contact(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD isdeleted (any) OPT ANY
+             ADD masterrecordid (any) OPT ANY
+             ADD accountid (any) OPT ANY
+             ADD lastname (any) OPT ANY
+             ADD firstname (any) OPT ANY
+             ADD salutation (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD otherstreet (any) OPT ANY
+             ADD othercity (any) OPT ANY
+             ADD otherstate (any) OPT ANY
+             ADD otherpostalcode (any) OPT ANY
+             ADD othercountry (any) OPT ANY
+             ADD otherlatitude (any) OPT ANY
+             ADD otherlongitude (any) OPT ANY
+             ADD otheraddress (any) OPT ANY
+             ADD mailingstreet (any) OPT ANY
+             ADD mailingcity (any) OPT ANY
+             ADD mailingstate (any) OPT ANY
+             ADD mailingpostalcode (any) OPT ANY
+             ADD mailingcountry (any) OPT ANY
+             ADD mailinglatitude (any) OPT ANY
+             ADD mailinglongitude (any) OPT ANY
+             ADD mailingaddress (any) OPT ANY
+             ADD phone (any) OPT ANY
+             ADD fax (any) OPT ANY
+             ADD mobilephone (any) OPT ANY
+             ADD homephone (any) OPT ANY
+             ADD otherphone (any) OPT ANY
+             ADD assistantphone (any) OPT ANY
+             ADD reportstoid (any) OPT ANY
+             ADD email (any) OPT ANY
+             ADD title (any) OPT ANY
+             ADD department (any) OPT ANY
+             ADD assistantname (any) OPT ANY
+             ADD leadsource (any) OPT ANY
+             ADD birthdate (any) OPT ANY
+             ADD description (any) OPT ANY
+             ADD ownerid (any) OPT ANY
+             ADD createddate (any) OPT ANY
+             ADD createdbyid (any) OPT ANY
+             ADD lastmodifieddate (any) OPT ANY
+             ADD lastmodifiedbyid (any) OPT ANY
+             ADD systemmodstamp (any) OPT ANY
+             ADD lastactivitydate (any) OPT ANY
+             ADD lastcurequestdate (any) OPT ANY
+             ADD lastcuupdatedate (any) OPT ANY
+             ADD lastvieweddate (any) OPT ANY
+             ADD lastreferenceddate (any) OPT ANY
+             ADD emailbouncedreason (any) OPT ANY
+             ADD emailbounceddate (any) OPT ANY
+             ADD isemailbounced (any) OPT ANY
+             ADD photourl (any) OPT ANY
+             ADD jigsaw (any) OPT ANY
+             ADD jigsawcontactid (any) OPT ANY
+             ADD cleanstatus (any) OPT ANY
+             ADD level__c (any) OPT ANY
+             ADD languages__c (any) OPT ANY
+        )
+        OUTPUTLIST (accountid, assistantname, assistantphone, birthdate, cleanstatus, createdbyid, createddate, department, description, email, emailbounceddate, emailbouncedreason, fax, firstname, homephone, id, isdeleted, isemailbounced, jigsaw, jigsawcontactid, languages__c, lastactivitydate, lastcurequestdate, lastcuupdatedate, lastmodifiedbyid, lastmodifieddate, lastname, lastreferenceddate, lastvieweddate, leadsource, level__c, mailingaddress, mailingcity, mailingcountry, mailinglatitude, mailinglongitude, mailingpostalcode, mailingstate, mailingstreet, masterrecordid, mobilephone, name, otheraddress, othercity, othercountry, otherlatitude, otherlongitude, otherphone, otherpostalcode, otherstate, otherstreet, ownerid, phone, photourl, reportstoid, salutation, systemmodstamp, title
+        )
+        WRAPPER (jdbc bv_sf_contact)
+    );
+

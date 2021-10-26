@@ -1,0 +1,38 @@
+﻿CREATE OR REPLACE WRAPPER JSON bv_oauth_introspect
+    DATASOURCENAME=ds_oauth_introspect
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        access_token = 'ACCESS_TOKEN' : 'java.lang.String' (OBL) (DEFAULTVALUE='IwAGYzYTlmM9YVOTF5M4E3WmNmMDCkNTVk') EXTERN,
+        active = 'active' : 'java.lang.String',
+        scope = 'scope' : 'java.lang.String',
+        username = 'username' : 'java.lang.String',
+        sub = 'sub' : 'java.lang.String',
+        client_id = 'client_Id' : 'java.lang.String'
+    )
+    );
+
+CREATE OR REPLACE TABLE bv_oauth_introspect I18N us_pst (
+        access_token:text (extern),
+        active:text,
+        scope:text,
+        username:text,
+        sub:text,
+        client_id:text
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_oauth_introspect(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD access_token (=) OBL ONE
+             ADD active NOS ZERO ()
+             ADD scope NOS ZERO ()
+             ADD username NOS ZERO ()
+             ADD sub NOS ZERO ()
+             ADD client_id NOS ZERO ()
+        )
+        OUTPUTLIST (active, client_id, scope, sub, username
+        )
+        WRAPPER (json bv_oauth_introspect)
+    );
+

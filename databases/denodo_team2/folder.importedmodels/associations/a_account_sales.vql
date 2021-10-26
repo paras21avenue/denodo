@@ -1,0 +1,8 @@
+﻿CREATE OR REPLACE ASSOCIATION a_account_sales REFERENTIAL CONSTRAINT 
+FOLDER = '/importedmodels'
+    ENDPOINT a_account_sales_source account PRINCIPAL (1)
+    DESCRIPTION = 'a_account_sales_source'
+    ENDPOINT a_account_sales_target sales (0,*)
+    DESCRIPTION = 'a_account_sales_target'
+    ADD MAPPING id=customerid;
+

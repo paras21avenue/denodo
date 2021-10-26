@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE FOLDER '/importedModels' DESCRIPTION 'Folder created by Denodo Model Bridge.' ;
+
