@@ -22,6 +22,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-            curl --location --insecure --request GET https://api.publicapis.org/entries'
+            curl --location 'https://reqres.in/api/users/2'
 
       
