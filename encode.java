@@ -17,7 +17,7 @@ public class testsubstring {
 	public static void main (String [] args) throws IOException
 	{
 	
-        	 String text = new String(Files.readAllBytes(Paths.get("C:\\\\Users\\\\paras_pokhrel\\\\Downloads\\\\Revision96-VQL-2022-10-26.vql")), StandardCharsets.UTF_8);
+        	 String text = new String(Files.readAllBytes(Paths.get("test.vql")), StandardCharsets.UTF_8);
 	String encodedString = Base64.getEncoder().encodeToString(text.getBytes());
 	System.out.println(encodedString);
 		
