@@ -23,6 +23,6 @@ jobs:
       - name: Run a one-line script
         run: |
             curl --location 'https://reqres.in/api/users/2' > at.json
-            jq '.email' at.json
+            jq 'data.email' at.json
 
       
