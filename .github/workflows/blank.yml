@@ -23,7 +23,6 @@ jobs:
       - name: Run a one-line script
         run: |
             curl --location 'https://www.boredapi.com/api/activity' > at.json
-            echo "result= $(jq '.type' at.json)" >> $GITHUB_ENV
-            echo "${{ env.result }}"
+            jq '.type' at.json
 
       
