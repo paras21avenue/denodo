@@ -26,9 +26,9 @@ jobs:
             
       - name: Next script
         run:
-           echo "AUTH_TOKEN= $(jq '.type' at.json)" >> $GITHUB_ENV  
+           echo "get_value= $(jq '.type' at.json)" >> $GITHUB_ENV  
       - name: Second Script
         run:
-           echo "${{ env.AUTH_TOKEN }}"
+           echo "${{ env.get_value }}"
 
       
