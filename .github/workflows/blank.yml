@@ -23,5 +23,7 @@ jobs:
       - name: Run a one-line script
         run: |
             curl --location 'https://reqres.in/api/users/2'
+            cat test.json | jq .status.azure.resource_name
+            "test"
 
       
