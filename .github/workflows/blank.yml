@@ -21,8 +21,14 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: |
+        run: 
             curl --location 'https://www.boredapi.com/api/activity' > at.json
-            jq '.type' at.json
+            
+      - name: Next script
+        run:
+           echo "AUTH_TOKEN= $(jq '.type' at.json)" >> $GITHUB_ENV  
+      - name: Second Script
+        run:
+           echo "${{ env.AUTH_TOKEN }}"
 
       
