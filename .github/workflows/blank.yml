@@ -30,5 +30,10 @@ jobs:
       - name: Second Script
         run:
            echo "${{ env.get_value }}"
+      - name : ussing the var
+        run: |
+            curl --location 'https://reqres.in/api/users?Content-type=application%2Fjson' --header 'Content-Type: application/json' --data '{"name": ${{ env.get_value }},"job": "test"}'
+   
+         
 
       
