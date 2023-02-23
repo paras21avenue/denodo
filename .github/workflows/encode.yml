@@ -24,7 +24,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: converting vqltobase64
-        run: var=$ cat(base64 pull.vql | tr -d '\n\r')
+        run: var=$ (cat base64 pull.vql | tr -d '\n\r')
   
       # storing string in veriable
       - name: string into variable
