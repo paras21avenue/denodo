@@ -24,13 +24,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: converting vqltobase64
-        run: base64 pull.vql | tr -d '\n\r' > test.txt
-        
-      # Remove strings by using substring
-      - name: removing first four string
-        run: cut -c 5- <test.txt> finaloutput.vql
-
+        run: var=base64 pull.vql | tr -d '\n\r'
+  
       # storing string in veriable
       - name: string into variable
-        run: VAR=$(cat test.txt)
+        run: echo $var
       
