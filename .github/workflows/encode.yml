@@ -24,8 +24,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: converting vqltobase64
-        run: echo "get_value=$(base64 pull1.vql | tr -d '\n\r')" >> $GITHUB_ENV
-        
-      - name: ouput the get_value
-        run: "${{ env.get_value }}"
+        run: echo "get_value=$(base64 pull1.vql | tr -d '\n\r')" > foo.txt
+       
       
