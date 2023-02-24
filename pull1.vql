@@ -2,8 +2,490 @@
 # 
 # Generated with Denodo Platform 8.0 update 20220815.
 
-#-------------------------------------------
-# Denodo Export
-#
-# URI: //dnd-lb-vdp-ea3e32fe-0a56-474d-93d5-832da0a1e8d8.eastus.cloudapp.azure.com:9999/datafederation
-# Database(s): datafederation
+ENTER SINGLE USER MODE;
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+# 0 ====================================================================
+
+# #######################################
+# DATABASE
+# #######################################
+CREATE OR REPLACE DATABASE ci_cd_test 'db to implement and test ci-cd workflow';
+
+CONNECT DATABASE ci_cd_test;
+
+# #######################################
+# FOLDERS
+# #######################################
+CREATE OR REPLACE FOLDER '/1 - Connectivity' ;
+
+CREATE OR REPLACE FOLDER '/1 - connectivity/1 - data sources' ;
+
+CREATE OR REPLACE FOLDER '/1 - connectivity/2 - base views' ;
+
+CREATE OR REPLACE FOLDER '/2 - Logical Model' ;
+
+CREATE OR REPLACE FOLDER '/3 - Integration' ;
+
+CREATE OR REPLACE FOLDER '/3 - integration/api1' ;
+
+# #######################################
+# LISTENERS JMS
+# #######################################
+# No listeners jms
+# #######################################
+# LISTENERS KAFKA
+# #######################################
+# No listeners kafka
+# #######################################
+# DATASOURCES
+# #######################################
+CREATE OR REPLACE DATASOURCE CUSTOM ds_dynamodb_dfdev
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CLASSNAME='com.denodo.connect.dynamodb.wrapper.DynamoDBScanWrapper'
+    JARS 'denodo-dynamodb-customwrapper'
+    PARAMETERS (
+      'Access Key ID' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Access Key ID}',
+      'Secret Access Key' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Secret Access Key}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Secret Access Key.encrypted},
+      'Region' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Region}'
+    );
+
+CREATE OR REPLACE DATASOURCE JSON ds_reltio_sitedetails
+    FOLDER = '/1 - connectivity/1 - data sources'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.URL}'
+    HEADERS (
+        'Cookie'='CookieConsentPolicy=0:1; LSKey-c$$CookieConsentPolicy=0:1', 
+        'Content-Type'='application/json'
+    )
+    AUTHENTICATION OAUTH20 ( 
+      ACCESSTOKEN = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKEN}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKEN.ENCRYPTED}
+      REQUESTSIGNINGMETHOD = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.REQUESTSIGNINGMETHOD}
+      AUTHENTICATION_GRANT = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.AUTHENTICATION.GRANT}
+      TOKENENDPOINTURL = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.TOKENENDPOINTURL}'
+      CLIENTIDENTIFIER = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTIDENTIFIER}'
+      CLIENTSECRET = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTSECRET}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTSECRET.ENCRYPTED}
+      ACCESSTOKENEXPIRESIN = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKENEXPIRESIN}
+      AUTHORIZATIONSERVERURL = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.AUTHORIZATIONSERVERURL}'
+      REDIRECTIONENDPOINTURL = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.REDIRECTIONENDPOINTURL}
+      SETSTATEPARAMETER = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.SETSTATEPARAMETER}
+    )
+    PROXY OFF
+    HTTP_ERROR_CODES_TO_IGNORE (400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 419, 420, 422, 423, 424, 500, 501, 502, 503, 504, 505, 507);
+
+# #######################################
+# DATABASE CONFIGURATION
+# #######################################
+ALTER DATABASE ci_cd_test
+  CHARSET DEFAULT;
+
+ALTER DATABASE ci_cd_test
+  VCS ON (
+    REMOTEDB = sync
+  );
+
+# #######################################
+# WRAPPERS
+# #######################################
+CREATE OR REPLACE WRAPPER CUSTOM ds_dynamodb_dfdev
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_dynamodb_dfdev
+    PARAMETERS (
+      'Table' = 'use-dfe-dev-db-user-customer-mapping',
+      'Fields' = 'userId:varchar,customerId:varchar'
+    )
+    OUTPUTSCHEMA (
+        userid = 'userId' : 'java.lang.String' (OPT) (original_name='userId', sourcetypeid='12')  SORTABLE,
+        customerid = 'customerId' : 'java.lang.String' (OPT) (original_name='customerId', sourcetypeid='12')  SORTABLE
+    );
+
+CREATE OR REPLACE WRAPPER CUSTOM "ds_dynamodb_dfdev_4cf48f2d-6dbc-4892-b4ad-07b2862be9cc"
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_dynamodb_dfdev
+    PARAMETERS (
+      'Table' = 'use-dfe-dev-db-customer-sites-mapping',
+      'Fields' = 'customerId:varchar,siteId:varchar'
+    )
+    OUTPUTSCHEMA (
+        customerid = 'customerId' : 'java.lang.String' (OPT) (original_name='customerId', sourcetypeid='12')  SORTABLE,
+        siteid = 'siteId' : 'java.lang.String' (OPT) (original_name='siteId', sourcetypeid='12')  SORTABLE
+    );
+
+CREATE OR REPLACE WRAPPER CUSTOM "ds_dynamodb_dfdev_c5cdb321-0248-4e24-afd7-a6e263f9905b"
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_dynamodb_dfdev
+    PARAMETERS (
+      'Table' = 'use-dfe-dev-db-customer-mapping',
+      'Fields' = 'id:varchar,almId:varchar,emcpId:varchar,essId:varchar,reltioGoldenId:varchar'
+    )
+    OUTPUTSCHEMA (
+        id = 'id' : 'java.lang.String' (OPT) (original_name='id', sourcetypeid='12')  SORTABLE,
+        almid = 'almId' : 'java.lang.String' (OPT) (original_name='almId', sourcetypeid='12')  SORTABLE,
+        emcpid = 'emcpId' : 'java.lang.String' (OPT) (original_name='emcpId', sourcetypeid='12')  SORTABLE,
+        essid = 'essId' : 'java.lang.String' (OPT) (original_name='essId', sourcetypeid='12')  SORTABLE,
+        reltiogoldenid = 'reltioGoldenId' : 'java.lang.String' (OPT) (original_name='reltioGoldenId', sourcetypeid='12')  SORTABLE
+    );
+
+CREATE OR REPLACE WRAPPER CUSTOM iv_master_alm_emcp_ess_site_id
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_dynamodb_dfdev
+    PARAMETERS (
+      'Table' = 'use-dfe-dev-db-siteId-mapping',
+      'Fields' = 'id:varchar,almId:varchar,emcpId:varchar,essId:varchar,reltioGoldenId:varchar'
+    )
+    OUTPUTSCHEMA (
+        id = 'id' : 'java.lang.String' (OPT) (original_name='id', sourcetypeid='12')  SORTABLE,
+        almid = 'almId' : 'java.lang.String' (OPT) (original_name='almId', sourcetypeid='12')  SORTABLE,
+        emcpid = 'emcpId' : 'java.lang.String' (OPT) (original_name='emcpId', sourcetypeid='12')  SORTABLE,
+        essid = 'essId' : 'java.lang.String' (OPT) (original_name='essId', sourcetypeid='12')  SORTABLE,
+        reltiogoldenid = 'reltioGoldenId' : 'java.lang.String' (OPT) (original_name='reltioGoldenId', sourcetypeid='12')  SORTABLE
+    );
+
+CREATE OR REPLACE WRAPPER JSON ds_reltio_sitedetails
+    FOLDER = '/1 - connectivity/2 - base views'
+    DATASOURCENAME=ds_reltio_sitedetails
+    TUPLEROOT '/JSONFile'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.ci_cd_test.folder.1 - connectivity.folder.2 - base views.views.json.ds_reltio_sitedetails.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        sitegoldenid = 'SITEGOLDENID' : 'java.lang.String' (OBL) (DEFAULTVALUE='0039256106
+') EXTERN,
+        results = 'results' : ARRAY OF (
+            results = 'results' : REGISTER OF (
+                publisherid = 'publisherId' : 'java.lang.String',
+                publishercode = 'publisherCode' : 'java.lang.String',
+                goldenid = 'goldenId' : 'java.lang.String',
+                accountowner = 'accountOwner' : 'java.lang.String',
+                accounttype = 'accountType' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                name = 'name' : 'java.lang.String',
+                customerclassificationlevel1 = 'customerClassificationLevel1' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                customerclassificationlevel2 = 'customerClassificationLevel2' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                businessunitcode = 'businessUnitCode' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                marketsegment = 'marketSegment' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                marketsubsegment = 'marketSubSegment' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                accountlifecycle = 'accountLifeCycle' : REGISTER OF (
+                    code = 'code' : 'java.lang.String',
+                    value = 'value' : 'java.lang.String'
+                ),
+                deletionflag = 'deletionFlag' : 'java.lang.String',
+                phone = 'phone' : ARRAY OF (
+                    phone = 'phone' : REGISTER OF (
+                        phonetype = 'phoneType' : 'java.lang.String',
+                        phonenumber = 'phoneNumber' : 'java.lang.String'
+                    )
+                ),
+                blockbfo = 'blockBFO' : 'java.lang.String',
+                reltiocertified = 'reltioCertified' : 'java.lang.String',
+                address = 'address' : REGISTER OF (
+                    addresstype = 'addressType' : 'java.lang.String',
+                    addressline1 = 'addressLine1' : 'java.lang.String',
+                    city = 'city' : 'java.lang.String',
+                    stateprovince = 'stateProvince' : REGISTER OF (
+                        code = 'code' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String'
+                    ),
+                    country = 'country' : REGISTER OF (
+                        code = 'code' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String'
+                    ),
+                    postalcode = 'postalCode' : 'java.lang.String'
+                ),
+                website = 'website' : 'java.lang.String'
+            )
+        )
+    )
+    );
+
+# #######################################
+# STORED PROCEDURES
+# #######################################
+# No stored procedures
+# #######################################
+# TYPES
+# #######################################
+CREATE OR REPLACE TYPE _register_addressline1_city_state_postalcode_country_addresstype AS REGISTER OF (addressline1:text, city:text, state:text, postalcode:text, country:text, addresstype:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_accountlifecycle AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_accounttype AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_address_country AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_address_stateprovince AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_businessunitcode AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_customerclassificationlevel1 AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_customerclassificationlevel2 AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_marketsegment AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_marketsubsegment AS REGISTER OF (code:text, value:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_phone_phone AS REGISTER OF (phonetype:text, phonenumber:text);
+
+CREATE OR REPLACE TYPE _register_siteid_name_address_businesstype_phone_website_seprimarycontact_marketsegment_marketsubseg AS REGISTER OF (siteid:text, name:text, address:_register_addressline1_city_state_postalcode_country_addresstype, businesstype:text, phone:text, website:text, seprimarycontact:text, marketsegment:text, marketsubsegment:text, customerclassificationlevel1:text, customerclassificationlevel2:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_address AS REGISTER OF (addresstype:text, addressline1:text, city:text, stateprovince:ds_reltio_sitedetails_results_results_address_stateprovince, country:ds_reltio_sitedetails_results_results_address_country, postalcode:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results_phone AS ARRAY OF ds_reltio_sitedetails_results_results_phone_phone;
+
+CREATE OR REPLACE TYPE _array_register_siteid_name_address_businesstype_phone_website_seprimarycontact_marketsegment_market AS ARRAY OF _register_siteid_name_address_businesstype_phone_website_seprimarycontact_marketsegment_marketsubseg;
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results_results AS REGISTER OF (publisherid:text, publishercode:text, goldenid:text, accountowner:text, accounttype:ds_reltio_sitedetails_results_results_accounttype, name:text, customerclassificationlevel1:ds_reltio_sitedetails_results_results_customerclassificationlevel1, customerclassificationlevel2:ds_reltio_sitedetails_results_results_customerclassificationlevel2, businessunitcode:ds_reltio_sitedetails_results_results_businessunitcode, marketsegment:ds_reltio_sitedetails_results_results_marketsegment, marketsubsegment:ds_reltio_sitedetails_results_results_marketsubsegment, accountlifecycle:ds_reltio_sitedetails_results_results_accountlifecycle, deletionflag:text, phone:ds_reltio_sitedetails_results_results_phone, blockbfo:text, reltiocertified:text, address:ds_reltio_sitedetails_results_results_address, website:text);
+
+CREATE OR REPLACE TYPE ds_reltio_sitedetails_results AS ARRAY OF ds_reltio_sitedetails_results_results;
+
+# #######################################
+# MAPS
+# #######################################
+# No maps
+# #######################################
+# BASE VIEWS
+# #######################################
+CREATE OR REPLACE TABLE bv_dynamodb_dfdev_customer_sites_mapping I18N es_euro (
+        customerid:text (original_name = 'customerId', sourcetypeid = '12'),
+        siteid:text (original_name = 'siteId', sourcetypeid = '12')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_dynamodb_dfdev(
+        I18N es_euro
+        CONSTRAINTS (
+             ADD customerid (any) OPT ANY
+             ADD siteid (any) OPT ANY
+        )
+        OUTPUTLIST (customerid, siteid
+        )
+        WRAPPER (custom "ds_dynamodb_dfdev_4cf48f2d-6dbc-4892-b4ad-07b2862be9cc")
+    );
+
+CREATE OR REPLACE TABLE bv_dynamodb_dfdev_master_customerid I18N es_euro (
+        id:text (original_name = 'id', sourcetypeid = '12'),
+        almid:text (original_name = 'almId', sourcetypeid = '12'),
+        emcpid:text (original_name = 'emcpId', sourcetypeid = '12'),
+        essid:text (original_name = 'essId', sourcetypeid = '12'),
+        reltiogoldenid:text (original_name = 'reltioGoldenId', sourcetypeid = '12')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_dynamodb_dfdev(
+        I18N es_euro
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD almid (any) OPT ANY
+             ADD emcpid (any) OPT ANY
+             ADD essid (any) OPT ANY
+             ADD reltiogoldenid (any) OPT ANY
+        )
+        OUTPUTLIST (almid, emcpid, essid, id, reltiogoldenid
+        )
+        WRAPPER (custom "ds_dynamodb_dfdev_c5cdb321-0248-4e24-afd7-a6e263f9905b")
+    );
+
+CREATE OR REPLACE TABLE bv_dynamodb_dfdev_master_siteid I18N es_euro (
+        id:text (original_name = 'id', sourcetypeid = '12'),
+        almid:text (original_name = 'almId', sourcetypeid = '12'),
+        emcpid:text (original_name = 'emcpId', sourcetypeid = '12'),
+        essid:text (original_name = 'essId', sourcetypeid = '12'),
+        reltiogoldenid:text (original_name = 'reltioGoldenId', sourcetypeid = '12')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_dynamodb_dfdev_master_siteid(
+        I18N es_euro
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD almid (any) OPT ANY
+             ADD emcpid (any) OPT ANY
+             ADD essid (any) OPT ANY
+             ADD reltiogoldenid (any) OPT ANY
+        )
+        OUTPUTLIST (almid, emcpid, essid, id, reltiogoldenid
+        )
+        WRAPPER (custom iv_master_alm_emcp_ess_site_id)
+    );
+
+CREATE OR REPLACE TABLE bv_dynamodb_dfdev_user_customer_mapping I18N es_euro (
+        userid:text (original_name = 'userId', sourcetypeid = '12'),
+        customerid:text (original_name = 'customerId', sourcetypeid = '12')
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_dynamodb_dfdev(
+        I18N es_euro
+        CONSTRAINTS (
+             ADD userid (any) OPT ANY
+             ADD customerid (any) OPT ANY
+        )
+        OUTPUTLIST (customerid, userid
+        )
+        WRAPPER (custom ds_dynamodb_dfdev)
+    );
+
+CREATE OR REPLACE TABLE bv_reltio_sitedetails I18N es_euro (
+        sitegoldenid:text (extern),
+        results:ds_reltio_sitedetails_results
+    )
+    FOLDER = '/1 - connectivity/2 - base views'
+    CACHE PARTIAL EXACT
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE NOEXPIRE
+    ADD SEARCHMETHOD ds_reltio_sitedetails(
+        I18N es_euro
+        CONSTRAINTS (
+             ADD sitegoldenid (=) OBL ONE
+             ADD results NOS ZERO ()
+             ADD results NOS ZERO ()
+             ADD results.publisherid NOS ZERO ()
+             ADD results.publishercode NOS ZERO ()
+             ADD results.goldenid NOS ZERO ()
+             ADD results.accountowner NOS ZERO ()
+             ADD results.accounttype NOS ZERO ()
+             ADD results.accounttype.code NOS ZERO ()
+             ADD results.accounttype.value NOS ZERO ()
+             ADD results.name NOS ZERO ()
+             ADD results.customerclassificationlevel1 NOS ZERO ()
+             ADD results.customerclassificationlevel1.code NOS ZERO ()
+             ADD results.customerclassificationlevel1.value NOS ZERO ()
+             ADD results.customerclassificationlevel2 NOS ZERO ()
+             ADD results.customerclassificationlevel2.code NOS ZERO ()
+             ADD results.customerclassificationlevel2.value NOS ZERO ()
+             ADD results.businessunitcode NOS ZERO ()
+             ADD results.businessunitcode.code NOS ZERO ()
+             ADD results.businessunitcode.value NOS ZERO ()
+             ADD results.marketsegment NOS ZERO ()
+             ADD results.marketsegment.code NOS ZERO ()
+             ADD results.marketsegment.value NOS ZERO ()
+             ADD results.marketsubsegment NOS ZERO ()
+             ADD results.marketsubsegment.code NOS ZERO ()
+             ADD results.marketsubsegment.value NOS ZERO ()
+             ADD results.accountlifecycle NOS ZERO ()
+             ADD results.accountlifecycle.code NOS ZERO ()
+             ADD results.accountlifecycle.value NOS ZERO ()
+             ADD results.deletionflag NOS ZERO ()
+             ADD results.phone NOS ZERO ()
+             ADD results.phone NOS ZERO ()
+             ADD results.phone.phonetype NOS ZERO ()
+             ADD results.phone.phonenumber NOS ZERO ()
+             ADD results.blockbfo NOS ZERO ()
+             ADD results.reltiocertified NOS ZERO ()
+             ADD results.address NOS ZERO ()
+             ADD results.address.addresstype NOS ZERO ()
+             ADD results.address.addressline1 NOS ZERO ()
+             ADD results.address.city NOS ZERO ()
+             ADD results.address.stateprovince NOS ZERO ()
+             ADD results.address.stateprovince.code NOS ZERO ()
+             ADD results.address.stateprovince.value NOS ZERO ()
+             ADD results.address.country NOS ZERO ()
+             ADD results.address.country.code NOS ZERO ()
+             ADD results.address.country.value NOS ZERO ()
+             ADD results.address.postalcode NOS ZERO ()
+             ADD results.website NOS ZERO ()
+        )
+        OUTPUTLIST (results
+        )
+        WRAPPER (json ds_reltio_sitedetails)
+    )
+    DECLARE VIEW CLUSTER INDEX sitegoldenid_index PRIMARY  UNIQUE  ON (sitegoldenid ASC)
+    DECLARE CACHE INDEX sitegoldenid_index ON (sitegoldenid ASC);
+
+# #######################################
+# VIEWS
+# #######################################
+CREATE OR REPLACE VIEW f_bv_reltio_sitedetails FOLDER = '/2 - logical model' AS SELECT sitegoldenid AS sitegoldenid, accountowner AS accountowner, website AS website, name AS name, phonenumber AS phonenumber, (address).addresstype AS addresstype, (address).addressline1 AS addressline1, (address).city AS city, (address).postalcode AS postalcode, (address).stateprovince.value AS state, (address).country.value AS country, (marketsubsegment).value AS marketsubsegment, (customerclassificationlevel1).value AS customerclassificationlevel1, (customerclassificationlevel2).value AS customerclassificationlevel2, (businessunitcode).value AS businesstype, (marketsegment).value AS marketsegment FROM FLATTEN bv_reltio_sitedetails AS v ( v.results) ( v.results.phone);
+
+ALTER VIEW f_bv_reltio_sitedetails
+ LAYOUT (bv_reltio_sitedetails = [20, 20, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_user_customer_j_customer_sites FOLDER = '/2 - logical model' AS SELECT bv_dynamodb_dfdev_user_customer_mapping.userid AS userid, bv_dynamodb_dfdev_user_customer_mapping.customerid AS customerid, bv_dynamodb_dfdev_customer_sites_mapping.siteid AS siteid FROM bv_dynamodb_dfdev_user_customer_mapping AS bv_dynamodb_dfdev_user_customer_mapping NESTED PARALLEL LEFT OUTER JOIN 25 bv_dynamodb_dfdev_customer_sites_mapping AS bv_dynamodb_dfdev_customer_sites_mapping ON bv_dynamodb_dfdev_user_customer_mapping.customerid = bv_dynamodb_dfdev_customer_sites_mapping.customerid ;
+
+ALTER VIEW iv_user_customer_j_customer_sites
+ LAYOUT (bv_dynamodb_dfdev_user_customer_mapping = [20, 20, 200, 200], bv_dynamodb_dfdev_customer_sites_mapping = [377, 51, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_userid_to_customerid_mapping FOLDER = '/2 - logical model' AS SELECT bv_dynamodb_dfdev_user_customer_mapping.userid AS userid, bv_dynamodb_dfdev_user_customer_mapping.customerid AS customerid, bv_dynamodb_dfdev_master_customerid.almid AS almid, bv_dynamodb_dfdev_master_customerid.emcpid AS emcpid, bv_dynamodb_dfdev_master_customerid.essid AS essid, bv_dynamodb_dfdev_master_customerid.reltiogoldenid AS reltiogoldenid FROM bv_dynamodb_dfdev_user_customer_mapping AS bv_dynamodb_dfdev_user_customer_mapping LEFT OUTER JOIN bv_dynamodb_dfdev_master_customerid AS bv_dynamodb_dfdev_master_customerid ON bv_dynamodb_dfdev_user_customer_mapping.customerid = bv_dynamodb_dfdev_master_customerid.id  GROUP BY bv_dynamodb_dfdev_user_customer_mapping.userid, bv_dynamodb_dfdev_user_customer_mapping.customerid, bv_dynamodb_dfdev_master_customerid.id, bv_dynamodb_dfdev_master_customerid.almid, bv_dynamodb_dfdev_master_customerid.emcpid, bv_dynamodb_dfdev_master_customerid.essid, bv_dynamodb_dfdev_master_customerid.reltiogoldenid;
+
+ALTER VIEW iv_userid_to_customerid_mapping
+ LAYOUT (bv_dynamodb_dfdev_user_customer_mapping = [112, 37, 200, 200], bv_dynamodb_dfdev_master_customerid = [430, 45, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_userid_to_customerid_siteid_mapping FOLDER = '/2 - logical model' AS SELECT iv_user_customer_j_customer_sites.userid AS userid, iv_user_customer_j_customer_sites.customerid AS customerid, iv_user_customer_j_customer_sites.siteid AS siteid, bv_dynamodb_dfdev_master_siteid.reltiogoldenid AS reltiogoldenid FROM iv_user_customer_j_customer_sites AS iv_user_customer_j_customer_sites NESTED PARALLEL LEFT OUTER JOIN 25 bv_dynamodb_dfdev_master_siteid AS bv_dynamodb_dfdev_master_siteid ON iv_user_customer_j_customer_sites.siteid = bv_dynamodb_dfdev_master_siteid.id ;
+
+ALTER VIEW iv_userid_to_customerid_siteid_mapping
+ LAYOUT (bv_dynamodb_dfdev_master_siteid = [361, 52, 200, 200], iv_user_customer_j_customer_sites = [32, 8, 200, 200]);
+
+CREATE OR REPLACE VIEW p_f_bv_reltio_sitedetails FOLDER = '/2 - logical model' AS SELECT f_bv_reltio_sitedetails.sitegoldenid AS id, f_bv_reltio_sitedetails.name AS name, register(f_bv_reltio_sitedetails.addressline1, f_bv_reltio_sitedetails.city, f_bv_reltio_sitedetails.state, f_bv_reltio_sitedetails.postalcode, f_bv_reltio_sitedetails.country, f_bv_reltio_sitedetails.addresstype) AS address, f_bv_reltio_sitedetails.businesstype AS businesstype, f_bv_reltio_sitedetails.phonenumber AS phone, f_bv_reltio_sitedetails.website AS website, f_bv_reltio_sitedetails.accountowner AS seprimarycontact, f_bv_reltio_sitedetails.marketsegment AS marketsegment, f_bv_reltio_sitedetails.marketsubsegment AS marketsubsegment, f_bv_reltio_sitedetails.customerclassificationlevel1 AS customerclassificationlevel1, f_bv_reltio_sitedetails.customerclassificationlevel2 AS customerclassificationlevel2 FROM f_bv_reltio_sitedetails;
+
+ALTER VIEW p_f_bv_reltio_sitedetails
+ LAYOUT (f_bv_reltio_sitedetails = [20, 20, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_master_customer_reltio_details FOLDER = '/2 - logical model' AS SELECT p_f_bv_reltio_sitedetails.name AS name, p_f_bv_reltio_sitedetails.address AS address, p_f_bv_reltio_sitedetails.businesstype AS businesstype, p_f_bv_reltio_sitedetails.phone AS phone, p_f_bv_reltio_sitedetails.website AS website, p_f_bv_reltio_sitedetails.seprimarycontact AS seprimarycontact, p_f_bv_reltio_sitedetails.marketsegment AS marketsegment, p_f_bv_reltio_sitedetails.marketsubsegment AS marketsubsegment, p_f_bv_reltio_sitedetails.customerclassificationlevel1 AS customerclassificationlevel1, p_f_bv_reltio_sitedetails.customerclassificationlevel2 AS customerclassificationlevel2, iv_userid_to_customerid_mapping.reltiogoldenid AS reltiogoldenid, iv_userid_to_customerid_mapping.customerid AS customerid, iv_userid_to_customerid_mapping.userid AS userid FROM iv_userid_to_customerid_mapping AS iv_userid_to_customerid_mapping NESTED PARALLEL LEFT OUTER JOIN 25 p_f_bv_reltio_sitedetails AS p_f_bv_reltio_sitedetails ON iv_userid_to_customerid_mapping.reltiogoldenid = p_f_bv_reltio_sitedetails.id ;
+
+ALTER VIEW iv_master_customer_reltio_details
+ LAYOUT (iv_userid_to_customerid_mapping = [48, 13, 200, 200], p_f_bv_reltio_sitedetails = [402, 10, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_master_sites_j_reltio_sitedetails FOLDER = '/2 - logical model' AS SELECT iv_userid_to_customerid_siteid_mapping.userid AS userid, iv_userid_to_customerid_siteid_mapping.customerid AS customerid, iv_userid_to_customerid_siteid_mapping.siteid AS siteid, p_f_bv_reltio_sitedetails.name AS name, p_f_bv_reltio_sitedetails.address AS address, p_f_bv_reltio_sitedetails.businesstype AS businesstype, p_f_bv_reltio_sitedetails.phone AS phone, p_f_bv_reltio_sitedetails.website AS website, p_f_bv_reltio_sitedetails.seprimarycontact AS seprimarycontact, p_f_bv_reltio_sitedetails.marketsegment AS marketsegment, p_f_bv_reltio_sitedetails.marketsubsegment AS marketsubsegment, p_f_bv_reltio_sitedetails.customerclassificationlevel1 AS customerclassificationlevel1, p_f_bv_reltio_sitedetails.customerclassificationlevel2 AS customerclassificationlevel2 FROM iv_userid_to_customerid_siteid_mapping AS iv_userid_to_customerid_siteid_mapping NESTED PARALLEL LEFT OUTER JOIN 100 p_f_bv_reltio_sitedetails AS p_f_bv_reltio_sitedetails ON iv_userid_to_customerid_siteid_mapping.reltiogoldenid = p_f_bv_reltio_sitedetails.id ;
+
+ALTER VIEW iv_master_sites_j_reltio_sitedetails
+ LAYOUT (iv_userid_to_customerid_siteid_mapping = [20, 20, 200, 200], p_f_bv_reltio_sitedetails = [354, 17, 200, 200]);
+
+CREATE OR REPLACE VIEW iv_customer_j_sites FOLDER = '/3 - integration/api1' (
+    customerid (description = '23/02/2023')
+ )
+ AS SELECT master_customer_reltio_details.customerid AS customerid, master_customer_reltio_details.name AS name, master_customer_reltio_details.address AS address, master_customer_reltio_details.businesstype AS businesstype, master_customer_reltio_details.phone AS phone, master_customer_reltio_details.website AS website, master_customer_reltio_details.seprimarycontact AS seprimarycontact, master_customer_reltio_details.marketsegment AS marketsegment, master_customer_reltio_details.marketsubsegment AS marketsubsegment, master_customer_reltio_details.customerclassificationlevel1 AS customerclassificationlevel1, master_customer_reltio_details.customerclassificationlevel2 AS customerclassificationlevel2, nest(iv_master_sites_j_reltio_sitedetails.siteid, iv_master_sites_j_reltio_sitedetails.name, iv_master_sites_j_reltio_sitedetails.address, iv_master_sites_j_reltio_sitedetails.businesstype, iv_master_sites_j_reltio_sitedetails.phone, iv_master_sites_j_reltio_sitedetails.website, iv_master_sites_j_reltio_sitedetails.seprimarycontact, iv_master_sites_j_reltio_sitedetails.marketsegment, iv_master_sites_j_reltio_sitedetails.marketsubsegment, iv_master_sites_j_reltio_sitedetails.customerclassificationlevel1, iv_master_sites_j_reltio_sitedetails.customerclassificationlevel2) AS hierarchy, id FROM iv_master_customer_reltio_details AS master_customer_reltio_details NESTED PARALLEL LEFT OUTER JOIN 25 iv_master_sites_j_reltio_sitedetails AS iv_master_sites_j_reltio_sitedetails ON master_customer_reltio_details.customerid = iv_master_sites_j_reltio_sitedetails.customerid  WHERE id = master_customer_reltio_details.userid GROUP BY master_customer_reltio_details.name, master_customer_reltio_details.address, master_customer_reltio_details.businesstype, master_customer_reltio_details.phone, master_customer_reltio_details.website, master_customer_reltio_details.seprimarycontact, master_customer_reltio_details.marketsegment, master_customer_reltio_details.marketsubsegment, master_customer_reltio_details.customerclassificationlevel1, master_customer_reltio_details.customerclassificationlevel2, master_customer_reltio_details.reltiogoldenid, master_customer_reltio_details.customerid, master_customer_reltio_details.userid USING PARAMETERS ( id : text);
+
+ALTER VIEW iv_customer_j_sites
+ LAYOUT (iv_master_customer_reltio_details = [81, 46, 200, 200], iv_master_sites_j_reltio_sitedetails = [384, 55, 200, 200]);
+
+# #######################################
+# ASSOCIATIONS
+# #######################################
+# No associations
+# #######################################
+# WEBSERVICES
+# #######################################
+# No web services
+# #######################################
+# WIDGETS
+# #######################################
+# No widgets
+# #######################################
+# WEBCONTAINER WEB SERVICE DEPLOYMENTS
+# #######################################
+# No deployed web services
+# #######################################
+# WEBCONTAINER WIDGET DEPLOYMENTS
+# #######################################
+# No deployed widgets
+# #######################################
+# Closing connection with database ci_cd_test
+# #######################################
+CLOSE;
+
+
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+EXIT SINGLE USER MODE;
