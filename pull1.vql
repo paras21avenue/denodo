@@ -1,6 +1,6 @@
 # REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
 # 
-# Generated with Denodo Platform 8.0 update 20220815.
+# Generated with Platform 8.0 update 20220815.
 
 ENTER SINGLE USER MODE;
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -23,50 +23,3 @@ CREATE OR REPLACE FOLDER '/1 - Connectivity' ;
 CREATE OR REPLACE FOLDER '/1 - connectivity/1 - data sources' ;
 
 CREATE OR REPLACE FOLDER '/1 - connectivity/2 - base views' ;
-
-CREATE OR REPLACE FOLDER '/2 - Logical Model' ;
-
-CREATE OR REPLACE FOLDER '/3 - Integration' ;
-
-CREATE OR REPLACE FOLDER '/3 - integration/api1' ;
-
-# #######################################
-# LISTENERS JMS
-# #######################################
-# No listeners jms
-# #######################################
-# LISTENERS KAFKA
-# #######################################
-# No listeners kafka
-# #######################################
-# DATASOURCES
-# #######################################
-CREATE OR REPLACE DATASOURCE CUSTOM ds_dynamodb_dfdev
-    FOLDER = '/1 - connectivity/1 - data sources'
-    CLASSNAME='com.denodo.connect.dynamodb.wrapper.DynamoDBScanWrapper'
-    JARS 'denodo-dynamodb-customwrapper'
-    PARAMETERS (
-      'Access Key ID' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Access Key ID}',
-      'Secret Access Key' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Secret Access Key}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Secret Access Key.encrypted},
-      'Region' = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.custom.ds_dynamodb_dfdev.Region}'
-    );
-
-CREATE OR REPLACE DATASOURCE JSON ds_reltio_sitedetails
-    FOLDER = '/1 - connectivity/1 - data sources'
-    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.URL}'
-    HEADERS (
-        'Cookie'='CookieConsentPolicy=0:1; LSKey-c$$CookieConsentPolicy=0:1', 
-        'Content-Type'='application/json'
-    )
-    AUTHENTICATION OAUTH20 ( 
-      ACCESSTOKEN = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKEN}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKEN.ENCRYPTED}
-      REQUESTSIGNINGMETHOD = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.REQUESTSIGNINGMETHOD}
-      AUTHENTICATION_GRANT = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.AUTHENTICATION.GRANT}
-      TOKENENDPOINTURL = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.TOKENENDPOINTURL}'
-      CLIENTIDENTIFIER = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTIDENTIFIER}'
-      CLIENTSECRET = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTSECRET}' ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.CLIENTSECRET.ENCRYPTED}
-      ACCESSTOKENEXPIRESIN = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.ACCESSTOKENEXPIRESIN}
-      AUTHORIZATIONSERVERURL = '${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.AUTHORIZATIONSERVERURL}'
-      REDIRECTIONENDPOINTURL = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.REDIRECTIONENDPOINTURL}
-      SETSTATEPARAMETER = ${databases.ci_cd_test.folder.1 - connectivity.folder.1 - data sources.datasources.json.ds_reltio_sitedetails.ROUTE.HTTP.SETSTATEPARAMETER}
-    )
