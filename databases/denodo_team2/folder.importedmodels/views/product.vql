@@ -1,8 +1,0 @@
-﻿CREATE OR REPLACE INTERFACE VIEW product (
-        productid:int,
-        productname:text,
-        productprice:float
-    )
-    SET IMPLEMENTATION product_dummy
-    FOLDER = '/importedmodels';
-

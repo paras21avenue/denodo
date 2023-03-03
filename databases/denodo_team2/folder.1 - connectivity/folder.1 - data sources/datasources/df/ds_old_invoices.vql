@@ -1,8 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE DF ds_old_invoices
-    FOLDER = '/1 - connectivity/1 - data sources'
-    ROUTE LOCAL 'LocalConnection' '${databases.denodo_team2.folder.1 - connectivity.folder.1 - data sources.datasources.df.ds_old_invoices.ROUTE.LOCAL.PATH}'
-    COLUMNDELIMITER = ','
-    ENDOFLINEDELIMITER = '\n'
-    HEADER = TRUE;
-
