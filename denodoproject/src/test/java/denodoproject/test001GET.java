@@ -26,8 +26,9 @@ import java.util.Map.Entry;
 public class test001GET {
 	int id=0;
 	
-	@Test public void createProperties() throws IOException, InterruptedException 
-    { 
+	@Test ()
+		void test001() throws IOException, InterruptedException
+		{
 		
 		
 		System.out.println("Maven project working test.....");
