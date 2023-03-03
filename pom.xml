@@ -61,8 +61,8 @@
 				<inherited>true</inherited>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile>
-						<!-- <suiteXmlFile>Regressiontest.xml</suiteXmlFile> -->
+						<suiteXmlFile>denodoproject/testng.xml</suiteXmlFile>
+						
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
