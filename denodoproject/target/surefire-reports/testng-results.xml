@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="28746" started-at="2022-12-14T14:38:20 UTC" finished-at="2022-12-14T14:38:48 UTC">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="28746" started-at="2022-12-14T14:38:20 UTC" finished-at="2022-12-14T14:38:48 UTC">
+      <class name="denodoproject.test001GET">
+        <test-method status="PASS" signature="createProperties()[pri:0, instance:denodoproject.test001GET@56ac3a89]" name="createProperties" duration-ms="13259" started-at="2022-12-14T14:38:20 UTC" finished-at="2022-12-14T14:38:33 UTC">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createProperties -->
+        <test-method status="PASS" signature="test001()[pri:0, instance:denodoproject.test001GET@56ac3a89]" name="test001" duration-ms="6246" started-at="2022-12-14T14:38:33 UTC" depends-on-methods="denodoproject.test001GET.createProperties" finished-at="2022-12-14T14:38:39 UTC">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test001 -->
+        <test-method status="PASS" signature="test002()[pri:0, instance:denodoproject.test001GET@56ac3a89]" name="test002" duration-ms="9208" started-at="2022-12-14T14:38:39 UTC" depends-on-methods="denodoproject.test001GET.test001" finished-at="2022-12-14T14:38:48 UTC">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test002 -->
+      </class> <!-- denodoproject.test001GET -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
