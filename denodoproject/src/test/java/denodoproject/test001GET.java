@@ -31,7 +31,7 @@ public class test001GET {
 		{
 		
 		
-		System.out.println("Input from user is:");
+		System.out.println("Input from user is: ${{ github.event.inputs.name }}");
 	
 	
 	
