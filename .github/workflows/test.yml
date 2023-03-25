@@ -35,6 +35,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: |
-        cd denodoproject
         echo '${{ github.event.inputs.db_name }}' > denodoproject/test.txt
+        cd denodoproject
+        
         mvn clean test
