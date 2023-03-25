@@ -36,6 +36,7 @@ jobs:
     - name: Build with Maven
       run: |
         printf "${{ github.event.inputs.db_name }}" > denodoproject/test.txt
+        cat denodoproject/test.txt
         cd denodoproject
         
         mvn clean test
