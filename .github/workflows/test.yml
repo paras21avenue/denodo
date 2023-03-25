@@ -36,4 +36,5 @@ jobs:
     - name: Build with Maven
       run: |
         cd denodoproject
+        {{ github.event.inputs.db_name }} > test.txt
         mvn clean test
