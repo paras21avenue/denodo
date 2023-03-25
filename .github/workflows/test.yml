@@ -15,18 +15,12 @@ on:
     inputs:
       db_name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Enter the db to be promoted'
+        description: 'Enter the input'
         # Default value if no value is explicitly provided
         default: ''
         # Input has to be provided for the workflow to run
         required: true
-        
-      env_id:
-        description: 'Enter the target env'
-        # Default value if no value is explicitly provided
-        default: ''
-        # Input has to be provided for the workflow to run
-        required: true
+
 
 jobs:
   build:
