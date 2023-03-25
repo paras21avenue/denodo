@@ -31,7 +31,7 @@ public class test001GET {
 		{
 		
 		
-		System.out.println("Maven project working test.....");
+		System.out.println("Input from user is:");
 	
 	
 	
