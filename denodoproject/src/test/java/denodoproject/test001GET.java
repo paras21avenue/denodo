@@ -24,31 +24,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class test001GET {
-	int id=0;
-	
-	@Test ()
-		void test001() throws IOException, InterruptedException
-		{
-		
-		
-		try  
-        {  
-        int data=50/0; //may throw exception   
-        }  
-            //handling the exception  
-        catch(ArithmeticException e)  
-        {  
-            System.out.println("In catch block");  
-        }  
-	
-	
-	
-	
+	@Test
+	public void validate_response_status_code_403() {
+	    
+	    Header authorizationHeader = new Header("Authorization", "Bearer invalid-authorization-header");
+	    RequestSpecification httpRequest = RestAssured.given();
+	    httpRequest.header(authorizationHeader);
+	    
+	    Response response = httpRequest.get("/tov5c2VC2c1RKXeM80rCtgXVmGN6Kj");
+	    Assert.assertEquals(403, response.getStatusCode());
 	}
 	
 	
-	
-	
-	
-
 }
