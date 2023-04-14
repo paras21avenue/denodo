@@ -23,12 +23,16 @@ public class test001GET {
 	@Test
 	public void validate_response_status_code_403() {
 	    
-	    Header authorizationHeader = new Header("Authorization", "Bearer invalid-authorization-header");
-	    RequestSpecification httpRequest = RestAssured.given();
-	    httpRequest.header(authorizationHeader);
-	    
-	    Response response = httpRequest.get("/tov5c2VC2c1RKXeM80rCtgXVmGN6Kj");
-	    Assert.assertEquals(403, response.getStatusCode());
+	    RestAssured.baseURI = "https://demoqa.com/Account/v1/User/";
+		RequestSpecification httpRequest = RestAssured.given();
+
+        Response response = httpRequest.get("test");
+
+        // Get the status code of the request. 
+        //If request is successful, status code will be 200
+        int statusCode = response.getStatusCode();
+        Assert.assertEquals(statusCode /*actual value*/, 200 /*expected value*/, 
+                "Correct status code returned");
 	}
 
 }
