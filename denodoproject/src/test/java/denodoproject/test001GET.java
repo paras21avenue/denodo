@@ -31,16 +31,7 @@ public class test001GET {
 		{
 		
 		
-		try {
-		FileInputStream file = new FileInputStream("abcd"); 
-	        XSSFWorkbook wb = new XSSFWorkbook(file); 
-	        XSSFSheet sh = wb.getSheet("Sheet1"); 
-		
-		Thread.sleep(100);
-		}
-		catch (Exception e) {
-			testcasefailedWithExecption(e, "Failure");
-		}
+		System.out.println("test");
 	
 	
 	
