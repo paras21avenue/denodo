@@ -32,8 +32,7 @@ public class test001GET {
 		
 		
 		try {
-		FileInputStream file = new FileInputStream( 
-	        		"abcd"); 
+		FileInputStream file = new FileInputStream("abcd"); 
 	        XSSFWorkbook wb = new XSSFWorkbook(file); 
 	        XSSFSheet sh = wb.getSheet("Sheet1"); 
 		
