@@ -31,7 +31,15 @@ public class test001GET {
 		{
 		
 		
-		System.out.println("test");
+		try  
+        {  
+        int data=50/0; //may throw exception   
+        }  
+            //handling the exception  
+        catch(ArithmeticException e)  
+        {  
+            System.out.println("In catch block");  
+        }  
 	
 	
 	
