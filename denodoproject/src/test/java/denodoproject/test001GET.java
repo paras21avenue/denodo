@@ -31,7 +31,7 @@ public class test001GET {
         // Get the status code of the request. 
         //If request is successful, status code will be 200
         int statusCode = response.getStatusCode();
-        Assert.assertEquals(statusCode /*actual value*/, 401 /*expected value*/, 
+        Assert.assertEquals(statusCode /*actual value*/, 200 /*expected value*/, 
                 "Correct status code returned");
 	}
 
